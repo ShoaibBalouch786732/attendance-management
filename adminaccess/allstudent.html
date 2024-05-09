@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Search All Students</title>
+<style>
+/* Modal styles */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.4);
+}
+
+.modal-content {
+    background-color: #fefefe;
+    margin: 15% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+}
+
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.table-container {
+    overflow-x: auto;
+}
+
+table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+table, th, td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+}
+
+th {
+    background-color: #f2f2f2;
+}
+
+/* Button lock effect */
+.locked-button {
+    text-align: center; 
+    position: relative;
+    overflow: hidden;
+    display: inline-block;
+}
+
+.locked-button button {
+    position: relative;
+    z-index: 1;
+}
+
+.locked-button::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    transition: all 0.3s ease;
+    z-index: 2;
+}
+
+.locked-button:hover::before {
+    width: 0%;
+}
+
+#searchButton {
+    cursor: pointer;
+}
+
+</style>
+</head>
+<body>
+
+<div class="locked-button">
+    <button id="searchButton">Search All Students</button>
+</div>
+
+<div id="myModal" class="modal">
+    <div class="modal-content">
+        <span class="close">&times;</span>
+        <div class="table-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Age</th>
+                        <th>Grade</th>
+                    </tr>
+                </thead>
+                <tbody id="studentList"></tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<script>
+
+let students = [
+    { name: "John Doe", age: 20, grade: "A" },
+    { name: "Jane Smith", age: 21, grade: "B" },
+    { name: "Alice Johnson", age: 22, grade: "C" },
+    { name: "John Doe", age: 20, grade: "A" },
+    { name: "Jane Smith", age: 21, grade: "B" },
+    { name: "Alice Johnson", age: 22, grade: "C" },
+    { name: "John Doe", age: 20, grade: "A" },
+    { name: "Jane Smith", age: 21, grade: "B" },
+    { name: "Alice Johnson", age: 22, grade: "C" },
+    { name: "John Doe", age: 20, grade: "A" },
+    { name: "Jane Smith", age: 21, grade: "B" },
+    { name: "Alice Johnson", age: 22, grade: "C" },
+    { name: "John Doe", age: 20, grade: "A" },
+    { name: "Jane Smith", age: 21, grade: "B" },
+    { name: "Alice Johnson", age: 22, grade: "C" },
+    { name: "John Doe", age: 20, grade: "A" },
+    { name: "Jane Smith", age: 21, grade: "B" },
+    { name: "Alice Johnson", age: 22, grade: "C" },
+    { name: "John Doe", age: 20, grade: "A" },
+    { name: "Jane Smith", age: 21, grade: "B" },
+    { name: "Alice Johnson", age: 22, grade: "C" },
+    { name: "John Doe", age: 20, grade: "A" },
+    { name: "Jane Smith", age: 21, grade: "B" },
+    { name: "Alice Johnson", age: 22, grade: "C" },
+    { name: "John Doe", age: 20, grade: "A" },
+    { name: "Jane Smith", age: 21, grade: "B" },
+    { name: "Alice Johnson", age: 22, grade: "C" },
+    { name: "John Doe", age: 20, grade: "A" },
+    { name: "Jane Smith", age: 21, grade: "B" },
+    { name: "Alice Johnson", age: 22, grade: "C" },
+    { name: "John Doe", age: 20, grade: "A" },
+    { name: "Jane Smith", age: 21, grade: "B" },
+    { name: "Alice Johnson", age: 22, grade: "C" },
+    { name: "John Doe", age: 20, grade: "A" },
+    { name: "Jane Smith", age: 21, grade: "B" },
+    { name: "Alice Johnson", age: 22, grade: "C" },
+];
+
+let modal = document.getElementById("myModal");
+let searchButton = document.getElementById("searchButton");
+let span = document.getElementsByClassName("close")[0];
+
+searchButton.onclick = function() {
+    modal.style.display = "block";
+    displayStudentList();
+}
+
+function displayStudentList() {
+    let studentListElement = document.getElementById("studentList");
+    studentListElement.innerHTML = ""; // Clear previous content
+    students.forEach(student => {
+        let row = document.createElement("tr");
+        row.innerHTML = `
+            <td>${student.name}</td>
+            <td>${student.age}</td>
+            <td>${student.grade}</td>
+        `;
+        studentListElement.appendChild(row);
+    });
+}
+
+span.onclick = function() {
+    modal.style.display = "none";
+}
+
+window.onclick = function(event) {
+    if (event.target == modal) {
+        modal.style.display = "none";
+    }
+}
+</script>
+
+</body>
+</html>

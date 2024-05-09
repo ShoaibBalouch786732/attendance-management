@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <title>View Page</title>
+ <style>
+    #userDataBody {
+    display: flex;
+    flex-direction: row;
+}
+
+
+#userDataBody td {
+    padding: 10px;
+    border: 1px solid #ccc;
+}
+
+table {
+    border-collapse: collapse;
+    width: 100%;
+    border: 2px solid #ddd; 
+}
+
+
+table th {
+    background-color: #f2f2f2; 
+    padding: 12px;
+    text-align: left;
+    border-bottom: 2px solid #ddd; 
+}
+
+
+table td {
+    padding: 8px;
+    border-bottom: 2px solid #ddd; 
+    border-right: 2px solid #ddd; 
+}
+
+
+table tr:first-child {
+    background-color: #007bff; 
+    color: #fff; 
+}
+
+
+table tr:nth-child(even) {
+    background-color: #f2f2f2; 
+}
+
+
+table tr td:nth-child(odd) {
+    border-right: 1px solid #ddd; 
+}
+
+
+ </style>
+</head>
+<body>
+   
+    <h2 text-align="center">Student Attendence successfully</h2>
+    <div id="userData">
+        
+    </div>
+
+    
+
+    <script >
+       document.addEventListener("DOMContentLoaded", function() {
+    
+    let urlParams = new URLSearchParams(window.location.search);
+    
+    let username = urlParams.get("username");
+
+    let password = urlParams.get("password");
+    localStorage.setItem("username", username);
+    localStorage.setItem("password", password);
+    console.log("Username:", username);
+    console.log("Password:", password);
+   
+    let currentDate = new Date().toLocaleDateString();
+
+    
+    let tableHTML = `
+        <table>
+            <tbody>
+                <tr>
+                    
+                    <td>${username}</td>
+                
+                    
+                    <td >${password}</td>
+               
+                  
+                    <td>${currentDate}</td>
+                </tr>
+            </tbody>
+        </table>
+    `;
+
+    
+    document.getElementById("userData").innerHTML = tableHTML;
+});
+
+
+    </script>
+    
+</body>
+</html>

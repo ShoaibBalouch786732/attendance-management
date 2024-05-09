@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Leave Application</title>
+    <style>
+        /* Leave Application Form */
+.leave-application {
+    width: 80%;
+    margin: 50px auto;
+    text-align: center;
+}
+
+.leave-application h2 {
+    margin-bottom: 20px;
+}
+
+.leave-application form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.leave-application label {
+    margin-bottom: 10px;
+}
+
+.leave-application textarea {
+    width: 80%;
+    margin-bottom: 20px;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.leave-application button {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+/* Success Modal */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.modal-content {
+    background-color: #fefefe;
+    margin: 20% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    border-radius: 4px;
+    width: 50%;
+    text-align: center;
+}
+
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.close:hover,
+.close:focus {
+    color: red;
+    text-decoration: none;
+    cursor: pointer;
+   
+    border-radius: 30%;
+    
+    background-color: gainsboro; 
+    border-radius: 50%; 
+}
+
+    </style>
+</head>
+<body>
+    <div class="leave-application">
+        <h2>Leave Application Form</h2>
+        <form id="leaveForm">
+            <label for="reason">Reason for Leave:</label>
+            <textarea id="reason" name="reason" rows="4" required></textarea>
+            <button type="submit">send application</button>
+        </form>
+    </div>
+
+
+    <div id="successModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <p color="green">congratulation-> Your leave application has been send  successfully!</p>
+        </div>
+    </div>
+
+    <script>
+        let modal = document.getElementById("successModal");
+let reasonTextarea = document.getElementById("reason");
+let span = document.getElementsByClassName("close")[0];
+
+document.getElementById("leaveForm").addEventListener("submit", function(event) {
+    event.preventDefault(); 
+    modal.style.display = "block"; 
+    reasonTextarea.value = ""; 
+});
+
+span.onclick = function() {
+    modal.style.display = "none"; 
+    reasonTextarea.value = ""; 
+    reasonTextarea.focus(); 
+};
+
+window.onclick = function(event) {
+    if (event.target == modal) {
+        modal.style.display = "none"; 
+        reasonTextarea.value = ""; 
+        reasonTextarea.focus(); 
+    }
+};
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>View All Logged-in Students</title>
+<style>
+    /* CSS styles as before */
+
+    /* Modal styles */
+    .modal {
+        display: none;
+        position: fixed;
+        z-index: 1;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        overflow: auto;
+        background-color: rgba(0,0,0,0.4);
+    }
+
+    .modal-content {
+        background-color: #fefefe;
+        margin: 15% auto;
+        padding: 20px;
+        border: 1px solid #888;
+        width: 80%;
+    }
+
+    .close {
+        color: #aaaaaa;
+        float: right;
+        font-size: 28px;
+        font-weight: bold;
+    }
+
+    .close:hover,
+    .close:focus {
+        color: #000;
+        text-decoration: none;
+        cursor: pointer;
+    }
+    table {
+        border-collapse: collapse;
+        width: 100%;
+        margin-top: 20px;
+    }
+
+    th, td {
+        border: 1px solid #ddd;
+        padding: 10px;
+        text-align: left;
+    }
+
+    th {
+        background-color: #f2f2f2;
+    }
+
+    tr:nth-child(even) {
+        background-color: #f2f2f2;
+    }
+
+    .edit-btn, .delete-btn {
+        padding: 8px 16px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+    }
+
+    .edit-btn {
+        background-color: #4CAF50;
+        color: white;
+    }
+
+    .edit-btn:hover {
+        background-color: #45a049;
+    }
+
+    .delete-btn {
+        background-color: #f44336;
+        color: white;
+    }
+
+    .delete-btn:hover {
+        background-color: #da190b;
+    }
+    h2 {
+    text-align: center; 
+    font-family: Arial, sans-serif;
+    color: #333; 
+  }
+</style>
+</head>
+<body>
+
+<h2>View All Logged-in Students</h2>
+
+<table id="studentTable">
+  <tr>
+    <th>p</th>
+    <th>Name</th>
+    <th>Date</th>
+    <th>Actions</th>
+  </tr>
+</table>
+
+
+<div id="editModal" class="modal">
+  <div class="modal-content">
+    <span class="close">&times;</span>
+    <h2>Edit Student Name</h2>
+    <input type="text" id="editNameInput">
+    <button id="saveEditBtn">Save</button>
+  </div>
+</div>
+
+<script>
+
+const students = [
+    { name: "John Doe", date: "2024-05-05" },
+    { name: "Alice Smith", date: "2024-04-25" },
+    { name: "Bob Johnson", date: "2024-04-30" },
+    { name: "John Doe", date: "2024-05-05" },
+    { name: "Alice Smith", date: "2024-04-25" },
+    { name: "Bob Johnson", date: "2024-04-30" },
+    { name: "John Doe", date: "2024-05-05" },
+    { name: "Alice Smith", date: "2024-04-25" },
+    { name: "Bob Johnson", date: "2024-04-30" }
+
+];
+
+function populateStudentTable() {
+    const table = document.getElementById('studentTable');
+    table.innerHTML = '';
+
+    students.forEach((student, index) => {
+        const row = table.insertRow();
+        const nameCell = row.insertCell(0);
+        const dateCell = row.insertCell(1);
+        const actionCell = row.insertCell(2);
+
+        nameCell.textContent = student.name;
+        dateCell.textContent = student.date;
+
+        const editBtn = document.createElement('button');
+        editBtn.textContent = 'Edit';
+        editBtn.className = 'edit-btn';
+        editBtn.addEventListener('click', () => openEditModal(index));
+        actionCell.appendChild(editBtn);
+
+        const deleteBtn = document.createElement('button');
+        deleteBtn.textContent = 'Delete';
+        deleteBtn.className = 'delete-btn';
+        deleteBtn.addEventListener('click', () => deleteStudent(index));
+        actionCell.appendChild(deleteBtn);
+    });
+}
+
+function openEditModal(index) {
+    const modal = document.getElementById('editModal');
+    const editNameInput = document.getElementById('editNameInput');
+    editNameInput.value = students[index].name;
+
+    modal.style.display = 'block';
+
+
+    const closeBtn = document.querySelector('.close');
+    closeBtn.onclick = function() {
+        modal.style.display = 'none';
+    };
+
+    
+    const saveEditBtn = document.getElementById('saveEditBtn');
+    saveEditBtn.onclick = function() {
+        const newName = editNameInput.value.trim();
+        if (newName) {
+            students[index].name = newName;
+            populateStudentTable();
+            modal.style.display = 'none';
+        } else {
+            alert('Name cannot be empty!');
+        }
+    };
+}
+
+function deleteStudent(index) {
+    if (confirm('Are you sure you want to delete ' + students[index].name + '?')) {
+        students.splice(index, 1);
+        populateStudentTable();
+    }
+}
+
+populateStudentTable();
+</script>
+
+</body>
+</html>

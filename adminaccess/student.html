@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Student Attendance</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+  }
+  .container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+  }
+  h2 {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  .first-paragraph {
+    background-color: #e0e0e0;
+    border-radius: 10px;
+    padding: 10px;
+  }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+  }
+  th, td {
+    padding: 8px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+  }
+  th {
+    background-color: #f2f2f2;
+  }
+  .button-container {
+    display: flex;
+    justify-content: space-between;
+  }
+  .edit-button, .apsend-button {
+    padding: 8px 16px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  .edit-button {
+    background-color: #4caf50;
+    color: white;
+  }
+  .apsend-button {
+    background-color: #ff9800;
+    color: white;
+  }
+</style>
+</head>
+<body>
+<div class="container">
+  <h2>Student Attendance</h2>
+  <p class="first-paragraph">Attendance for today:</p>
+  <table>
+    <thead>
+      <tr>
+      
+        <th>Name</th>
+        <th>Date</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody id="attendance-table">
+      
+    </tbody>
+  </table>
+</div>
+
+<script>
+  
+  const students = [
+    { name: "shoaib ", date: "2024-05-08" },
+    { name: "Student Name 2", date: "2024-05-08" },
+    { name: "Student Name 1", date: "2024-05-08" },
+    { name: "Student Name 2", date: "2024-05-08" },
+    { name: "Student Name 1", date: "2024-05-08" },
+    { name: "Student Name 2", date: "2024-05-08" },
+  ];
+
+
+  function generateAttendanceRows() {
+    const tableBody = document.getElementById("attendance-table");
+    tableBody.innerHTML = ""; 
+
+    students.forEach(student => {
+      const row = document.createElement("tr");
+      row.innerHTML = `
+        <td>${student.name}</td>
+        <td>${student.date}</td>
+        <td class="button-container">
+          <button class="edit-button">Edit</button>
+          <button class="apsend-button">Apsend</button>
+        </td>
+      `;
+      tableBody.appendChild(row);
+    });
+  }
+
+
+  generateAttendanceRows();
+
+  
+  const editButtons = document.querySelectorAll(".edit-button");
+  editButtons.forEach(button => {
+    button.addEventListener("click", () => {
+      alert("Edit button clicked!");
+    });
+  });
+
+ 
+  const apsendButtons = document.querySelectorAll(".apsend-button");
+  apsendButtons.forEach(button => {
+    button.addEventListener("click", () => {
+      alert("Apsend button clicked!");
+    });
+  });
+</script>
+</body>
+</html>
